@@ -1,369 +1,114 @@
 /*
- * __        __          _                  ____  _         _
- * \ \      / /_ _ _   _| |__   __ _ _ __  / ___|| |_ _   _| | ___
- *  \ \ /\ / / _` | | | | '_ \ / _` | '__| \___ \| __| | | | |/ _ \
- *   \ V  V / (_| | |_| | |_) | (_| | |     ___) | |_| |_| | |  __/
- *    \_/\_/ \__,_|\__, |_.__/ \__,_|_|    |____/ \__|\__, |_|\___|
- *                 |___/                              |___/
- *
- * by Stephan Raabe (2023)
- * Edited by Pilk (2024) :3c
- * -----------------------------------------------------
- */
 
-/* -----------------------------------------------------
- * Import Pywal colors
- * ----------------------------------------------------- */
-/* @import 'style-light.css'; */
-@define-color backgroundlight #FFFFFF;
-@define-color backgrounddark #FFFFFF;
-@define-color workspacesbackground1 #FFFFFF;
-@define-color workspacesbackground2 #CCCCCC;
-@define-color bordercolor #35D6E7;
-@define-color textcolor1 #000000;
-@define-color textcolor2 #000000;
-@define-color textcolor3 #FFFFFF;
-@define-color iconcolor #FFFFFF;
-@define-color backend1 #080809;
+██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗ 
+██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝
+██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║
+ ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 
-/* -----------------------------------------------------
- * General
- * ----------------------------------------------------- */
+Waybar Config File by Arfan Zubi
 
+*/
 
+@import url("./mocha.css");
 
 * {
-    font-family: "Fira Sans Semibold", "Font Awesome 6 Free", DroidSansMNerdFont, FontAwesome, awesomefont, Roboto, Helvetica, Arial, "fontawesome-free-6.6.0", sans-serif;
-    border: none;
-    border-radius: 0px;
-
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: bold;
+    font-size: 15px;
+    min-height: 0;
 }
 
 window#waybar {
-    background-color: rgba(219, 219, 219, 0.551);
-    margin: 10px 0 0 0;
-   /* border: 2px solid @bordercolor;
-     Enable border by removing these > */
-    border-radius: 50px 50px;
-
+    color: @text;
+    background: @mantle;
 }
 
-/* -----------------------------------------------------
- * Workspaces 
- * ----------------------------------------------------- */
+#workspaces,
+#workspaces button,
+#workspaces button.active,
+#workspaces button:hover {
+    border-radius: 1.5rem;
+}
 
 #workspaces {
-    margin: 6px 1px 6px 1px;
-    padding: 0px 5px;
-    border-radius: 15px;
-    border: 0px;
-    font-weight: bold;
-    font-style: normal;
-    font-size: 16px;
-    color: @textcolor1;
+    margin: 5px 0 5px 1rem;
+    background-color: rgba(54, 58, 79, 0.5);
 }
 
 #workspaces button {
-    padding: 0px 5px;
-    margin: 4px 3px;
-    border-radius: 15px;
-    border: 0px;
-    color: @textcolor3;
-    transition: all 0.3s ease-in-out;
+    padding: 0.5rem;
+    color: @text;
 }
 
 #workspaces button.active {
-    color: @textcolor1;
-    background: @workspacesbackground2;
-    border-radius: 15px;
-    min-width: 15px;
-    transition: all 0.3s ease-in-out;
+    color: @mauve;
 }
 
 #workspaces button:hover {
-    color: @textcolor1;
-    background: @workspacesbackground2;
-    border-radius: 15px;
+    color: @lavender;
+    background: @surface1;
+    border-color: @surface0;
 }
 
-/* -----------------------------------------------------
- * Tooltips
- * ----------------------------------------------------- */
-
-tooltip {
-    border-radius: 10px;
-    background-color: @backgroundlight;
-    opacity:0.8;
-    padding:20px;
-    margin:0px;
+#workspaces button.urgent {
+    color: @red;
 }
 
-tooltip label {
-    color: @textcolor2;
+#clock,
+#pulseaudio,
+#backlight,
+#battery,
+#language,
+#custom-lock,
+#custom-power {
+    margin: 5px 0;
+    padding: 0.5rem 1rem;
+    background-color: rgba(54, 58, 79, 0.5);
 }
-
-/* -----------------------------------------------------
- * Window
- * ----------------------------------------------------- */
 
 #window {
-    /*
-    background: @backgroundlight;*/
-    margin: 10px 15px 10px 0px;
-    padding: 2px 10px 0px 10px;
-    /*border-radius: 12px;*/
-    color:@textcolor0;
-    font-size:13px;
-    font-weight:normal;
+    margin: 5px 0;
+    padding: 0.5rem 1rem;
+    color: @blue;
 }
 
+/* make window module transparent when no windows present */
 window#waybar.empty #window {
-    background-color:transparent;
+    background-color: transparent;
 }
-
-/* -----------------------------------------------------
- * Taskbar
- * ----------------------------------------------------- */
-
-#taskbar {
-    /*
-     * background: @backgroundlight;
-     */
-    margin: 6px 15px 6px 0px;
-    padding:0px;
-    border-radius: 15px;
-    font-weight: normal;
-    font-style: normal;
-    /*
-    border: 1px solid @backgroundlight;*/
-}
-
-#taskbar button {
-    margin:0;
-    border-radius: 15px;
-    padding: 0px 5px 0px 5px;
-}
-
-/* -----------------------------------------------------
- * Modules
- * ----------------------------------------------------- */
-
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 5;
-}
-
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-/* -----------------------------------------------------
- * Idle Inhibator
- * ----------------------------------------------------- */
-
- #idle_inhibitor {
-    margin-right: 15px;
-    font-size: 22px;
-    font-weight: bold;
-    opacity: 0.8;
-    color: @iconcolor;
-}
-
-#idle_inhibitor.activated {
-    margin-right: 15px;
-    font-size: 20px;
-    font-weight: bold;
-    opacity: 0.8;
-    color: #dc2f2f;
-}
-
-/* -----------------------------------------------------
- * Custom Modules
- * ----------------------------------------------------- */
-
-/* -----------------------------------------------------
- * Custom Exit
- * ----------------------------------------------------- */
-
-#custom-exit {
-    margin: 0px 20px 0px 0px;
-    padding:0px;
-    font-size:20px;
-    color: @iconcolor;
-}
-
-
-/* -----------------------------------------------------
- * Hardware Group
- * ----------------------------------------------------- */
-/*
- #disk,#memory,#cpu,#language {
-    margin:0px;
-    padding:0px;
-    font-size:16px;
-    color:@iconcolor;
-}        "cpu",
-        "memory",
-*/
-#cpu {
-    margin: 1px 0px 0px 0px;
-    padding:0px;
-    font-size:16px;
-    color: @iconcolor;
-}
-
-#memory {
-    margin: 1px 0px 0px 0px;
-    padding:0px;
-    font-size:16px;
-    color: @iconcolor;
-}
-
-/* -----------------------------------------------------
- * Clock
- * ----------------------------------------------------- */
 
 #clock {
-    margin: 10px 15px 10px 0px;
-    font-size: 16px;
-    color: @textcolor0;
-
+    color: @mauve;
+    border-radius: 1.5rem;
 }
 
-/* -----------------------------------------------------
- * Backlight
- * ----------------------------------------------------- */
-
- #backlight {
-    background-color: @backgroundlight;
-    font-size: 16px;
-    color: @textcolor2;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 10px 15px 10px 0px;
+#battery,
+#battery.charging {
+    color: @green;
 }
 
-/* -----------------------------------------------------
- * Pulseaudio
- * ----------------------------------------------------- */
+#battery.warning:not(.charging) {
+    color: @red;
+}
 
 #pulseaudio {
-    font-size: 16px;
-    color: @textcolor0;
-    border-radius: 15px;
-    padding: 1px 0px 0px 2px;
-    margin: 10px 0px 10px 5px;
-
-}
-
-#pulseaudio.muted {
-    background-color: @backgrounddark;
-    color: @textcolor1;
-    
-}
-
-/* -----------------------------------------------------
- * Network
- * ----------------------------------------------------- */
-
-#network {
-    font-size: 16px;
-    color: @textcolor0;
-    border-radius: 15px;
-    padding: 1px 10px 0px 9px;
-    margin: 10px 5px 10px 6px;
-}
-
-#network.ethernet {
-    color: @textcolor0;
-}
-
-#network.wifi {
-    color: @textcolor0;
-}
-
-/* -----------------------------------------------------
- * Bluetooth
- * ----------------------------------------------------- */
-
- #bluetooth, #bluetooth.on, #bluetooth.connected {
-    font-size: 16px;
-    color: @textcolor0;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 10px 15px 10px 0px;
-}
-
-#bluetooth.off {
-    background-color: transparent;
-    padding: 0px;
-    margin: 0px;
-}
-
-/* -----------------------------------------------------
- * Battery
- * ----------------------------------------------------- */
-
-#battery {
-    background-color: @backgroundlight;
-    font-size: 16px;
-    color: @textcolor2;
-    border-radius: 15px;
-    padding: 2px 15px 0px 10px;
-    margin: 10px 15px 10px 0px;
-}
-
-#battery.charging, #battery.plugged {
-    color: @textcolor2;
-    background-color: @backgroundlight;
-}
-
-@keyframes blink {
-    to {
-        background-color: @backgroundlight;
-        color: @textcolor2;
-    }
-}
-
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: @textcolor3;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-/* -----------------------------------------------------
- * Tray
- * ----------------------------------------------------- */
-
-#tray {
-    margin:0px 10px 0px 0px;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
-}
-/* -----------------------------------------------------
- * Other
- * ----------------------------------------------------- */
-
-label:focus {
-    background-color: #000000;
+    margin-left: 1rem;
+    color: @maroon;
+    border-radius: 1.5rem 0 0 1.5rem;
 }
 
 #backlight {
-    background-color: #90b1b1;
+    color: @yellow;
 }
 
-
-#network.disconnected {
-    background-color: #f53c3c;
+#language {
+    color: @lavender;
 }
 
+#custom-power {
+    margin-right: 1rem;
+    color: @red;
+    border-radius: 0 1.5rem 1.5rem 0;
+}
