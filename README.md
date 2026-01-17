@@ -4,9 +4,9 @@ This is my hyprland arch dots these dots are still in development so not everyth
 
 # How to Install
 
-1. clone the github using '''git clone https://github.com/Ooferoor/arch-dots'''
+1. clone the github using "git clone https://github.com/Ooferoor/arch-dots"
 
-2. Then cd into the arch-dots then cd into NEW_CONFIG and run '''./install.sh'''
+2. Then cd into the arch-dots then cd into NEW_CONFIG and run "./install.sh"
 
 # DISCLAIMER
 
